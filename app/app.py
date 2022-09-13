@@ -19,7 +19,7 @@ def FlushRepository():
                 os.remove(entry.path)
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=FlushRepository, trigger="interval", hours=23)
+scheduler.add_job(func=FlushRepository, trigger="interval", seconds=20)
 scheduler.start()
 
 
