@@ -5,7 +5,7 @@ import base64
 def writeToFile(files,textFiles):
     with open(files, "rb") as f1,open(textFiles, "w") as f2:
         encoded_f1 = base64.b64encode(f1.read())
-        f2.write("data:audio/mp3;base64,")
+        f2.write("data:audio/mp4;base64,")
         f2.write(str(encoded_f1))
 
 def readFromFile(files):
