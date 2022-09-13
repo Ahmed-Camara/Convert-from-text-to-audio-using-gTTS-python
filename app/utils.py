@@ -21,7 +21,6 @@ def readFromFile(files):
 def generateAudio(text,lang,ticket,paths="C:/AUDIO"):
    
     if not os.path.exists(paths):
-        print("Does not exist")
         os.makedirs(paths)
     
     AudioFiles = paths+"/audio_"+lang+"_"+ticket+".mp4"
