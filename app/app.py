@@ -34,11 +34,12 @@ def convertFromTextToAudio():
         textFR = request.json['textFR']
         textEN = request.json['textEN']
         TicketNum = request.json['TicketNum']
+        path = request.json['path']
 
         if textFR is not None and textEN is not None and TicketNum is not None:
             print("Not none")
-            dataFR = utils.generateAudio(textFR,'fr',TicketNum)
-            dataEN = utils.generateAudio(textEN,'en',TicketNum)
+            dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
+            dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
 
     except Exception as e:
         return jsonify({
