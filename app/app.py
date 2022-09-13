@@ -4,8 +4,10 @@ import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 import shutil
 import utils
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def FlushRepository():
     folder = 'C:/AUDIO'

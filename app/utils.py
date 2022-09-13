@@ -16,7 +16,7 @@ def readFromFile(files):
 
 
 def generateAudio(text,lang,ticket):
-
+   
     AudioFiles = "C:/AUDIO/audio_"+lang+"_"+ticket+".mp4"
     TxtFiles = "C:/AUDIO/base64_"+lang+"_"+ticket+".txt"
 
