@@ -37,7 +37,7 @@ def convertFromTextToAudio():
         path = request.json['path']
 
         if textFR is not None and textEN is not None and TicketNum is not None:
-            print("Not none")
+            
             dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
             dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
 
@@ -47,7 +47,7 @@ def convertFromTextToAudio():
             "message":"Une erreur s'est produite, veuillez contacter l'administrateur :\n"+ str(e)
         })
     
-
+    
     return jsonify({
         "data_french":dataFR,
         "data_english":dataEN
