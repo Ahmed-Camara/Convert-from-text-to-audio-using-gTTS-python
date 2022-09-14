@@ -5,12 +5,14 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import shutil
 import utils
 from flask_cors import CORS
+import common
 
 app = Flask(__name__)
 CORS(app)
 
 def FlushRepository():
-    folder = 'C:/AUDIO'
+    folder = common.PATH_FOLDER
+
     with os.scandir(folder) as entries:
         for entry in entries:
             if entry.is_dir() and not entry.is_symlink():
@@ -42,9 +44,12 @@ def convertFromTextToAudio():
             dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
 
     except Exception as e:
+        common.status = "0"
+        common.ERROR_MSG = "Une erreur s'est produite, veuillez contacter l'administrateur :\n"
+        
         return jsonify({
-            "status":"0",
-            "message":"Une erreur s'est produite, veuillez contacter l'administrateur :\n"+ str(e)
+            "status":common.status,
+            "message":common.ERROR_MSG+ str(e)
         })
     
     
@@ -54,4 +59,4 @@ def convertFromTextToAudio():
     })
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=5000, debug=True, threaded=False)
+    app.run(host=common.host,port=common.port, debug=True, threaded=True)

@@ -1,11 +1,10 @@
-from email import header
 from gtts import gTTS
 import os.path
-from os import path
 import os
+import common
 import base64
-import json
-from flask import jsonify
+import app
+
 def writeToFile(files,textFiles):
     with open(files, "rb") as f1,open(textFiles, "w") as f2:
         encoded_f1 = base64.b64encode(f1.read())
@@ -19,9 +18,13 @@ def readFromFile(files):
     text_file.close()
     return data
 
+def flushDirectory():
+    return None
 
-def generateAudio(text,lang,ticket,paths="C:/AUDIO"):
+def generateAudio(text,lang,ticket,paths=common.PATH_FOLDER):
+    
     if not os.path.exists(paths):
+        app.FlushRepository()
         os.makedirs(paths)
     
     AudioFiles = paths+"/audio_"+lang+"_"+ticket+".mp4"
@@ -42,3 +45,5 @@ def generateAudio(text,lang,ticket,paths="C:/AUDIO"):
    # data = readFromFile("C:/AUDIO/b64.txt")
 
     return data
+
+
