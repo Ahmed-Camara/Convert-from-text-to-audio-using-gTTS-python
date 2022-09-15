@@ -1,12 +1,9 @@
 from flask import Flask,request,jsonify
-import os
-import atexit
-from apscheduler.schedulers.background import BackgroundScheduler
-
 import utils
 from flask_cors import CORS
 import common as c
-import helper as h
+from waitress import serve
+
 app = Flask(__name__)
 CORS(app)
 
@@ -39,6 +36,6 @@ def convertFromTextToAudio():
         "data_french":dataFR,
         "data_english":dataEN
     })
-
+#serve(app,host=c.host,port=c.port,threads=1)
 if __name__ == "__main__":
     app.run(host=c.host,port=c.port, debug=True, threaded=True)
