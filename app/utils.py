@@ -37,8 +37,6 @@ def generateAudio(text,lang,ticket,paths=c.PATH_FOLDER):
     
     writeToFile(AudioFiles,TxtFiles)
     data = readFromFile(TxtFiles)
-   # writeToFile("C:/AUDIO/audio.mp3","C:/AUDIO/b64.txt")
-   # data = readFromFile("C:/AUDIO/b64.txt")
 
     return data
 
