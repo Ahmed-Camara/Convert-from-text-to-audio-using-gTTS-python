@@ -36,6 +36,6 @@ def convertFromTextToAudio():
         "data_french":dataFR,
         "data_english":dataEN
     })
-#serve(app,host=c.host,port=c.port,threads=1)
-if __name__ == "__main__":
-    app.run(host=c.host,port=c.port, debug=True, threaded=True)
+serve(app,host=c.host,port=c.port,threads=1)
+#if __name__ == "__main__":
+ #   app.run(host=c.host,port=c.port, debug=True, threaded=True)
