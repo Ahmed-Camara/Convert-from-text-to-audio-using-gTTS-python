@@ -22,13 +22,12 @@ def convertFromTextToAudio():
 
         if textFR is None or len(textFR) == 0:
             c.dataENURL,c.dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
-            c.dataFR = ""
-            c.dataFRURL = ""
+            c.dataFRURL = c.dataFR = ""
         
         elif textEN is None or len(textEN) == 0:
             c.dataFRURL,c.dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
-            c.dataEN = ""
-            c.dataENURL = ""
+            c.dataENURL = c.dataEN = ""
+            
 
         elif textFR is not None and textEN is not None and TicketNum is not None:
             
