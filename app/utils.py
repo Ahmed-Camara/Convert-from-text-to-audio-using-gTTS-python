@@ -1,9 +1,9 @@
 from gtts import gTTS
 import os.path
 import os
-import common
+import common as c
 import base64
-import app
+import helper as h
 
 def writeToFile(files,textFiles):
     with open(files, "rb") as f1,open(textFiles, "w") as f2:
@@ -21,10 +21,10 @@ def readFromFile(files):
 def flushDirectory():
     return None
 
-def generateAudio(text,lang,ticket,paths=common.PATH_FOLDER):
+def generateAudio(text,lang,ticket,paths=c.PATH_FOLDER):
     
     if not os.path.exists(paths):
-        app.FlushRepository()
+        h.FlushRepository()
         os.makedirs(paths)
     
     AudioFiles = paths+"/audio_"+lang+"_"+ticket+".mp4"
@@ -37,10 +37,6 @@ def generateAudio(text,lang,ticket,paths=common.PATH_FOLDER):
     
     writeToFile(AudioFiles,TxtFiles)
     data = readFromFile(TxtFiles)
-    value = {
-        "headers":"data:audio/mp4;base64,",
-        "data_"+lang:data
-    }
    # writeToFile("C:/AUDIO/audio.mp3","C:/AUDIO/b64.txt")
    # data = readFromFile("C:/AUDIO/b64.txt")
 
