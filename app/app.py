@@ -16,11 +16,24 @@ def convertFromTextToAudio():
         textEN = request.json['textEN']
         TicketNum = request.json['TicketNum']
         path = request.json['path']
+        address = request.json['address']
 
-        if textFR is not None and textEN is not None and TicketNum is not None:
+        c.address = address
+
+        if textFR is None or len(textFR) == 0:
+            c.dataENURL,c.dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
+            c.dataFR = ""
+            c.dataFRURL = ""
+        
+        elif textEN is None or len(textEN) == 0:
+            c.dataFRURL,c.dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
+            c.dataEN = ""
+            c.dataENURL = ""
+
+        elif textFR is not None and textEN is not None and TicketNum is not None:
             
-            dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
-            dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
+            c.dataFRURL,c.dataFR = utils.generateAudio(textFR,'fr',TicketNum,path)
+            c.dataENURL,c.dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
 
     except Exception as e:
         c.status = "0"
@@ -33,8 +46,10 @@ def convertFromTextToAudio():
     
     
     return jsonify({
-        "data_french":dataFR,
-        "data_english":dataEN
+        "data_french":c.dataFR,
+        "data_english":c.dataEN,
+        "data_french_url":c.dataFRURL,
+        "data_english_url":c.dataENURL
     })
 #serve(app,host=c.host,port=c.port,threads=1)
 if __name__ == "__main__":
