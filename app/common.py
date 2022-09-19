@@ -1,4 +1,4 @@
-PATH_FOLDER = 'C:/AUDIO'
+PATH_FOLDER = None
 host = '0.0.0.0'
 port = 5000
 status = None
@@ -8,3 +8,4 @@ dataEN = None
 dataFRURL = None
 dataENURL = None
 address = None
+http = 'http://'
