@@ -4,18 +4,16 @@ import os
 import common as c
 import base64
 import shutil
-import requests
-import urllib
 
 def FlushRepository():
-    folder = c.PATH_FOLDER
-    with os.scandir(folder) as entries:
+
+    f = "C:/xampp/htdocs/AUDIO"
+    with os.scandir(f) as entries:
         for entry in entries:
             if entry.is_dir() and not entry.is_symlink():
                 shutil.rmtree(entry.path)
             else:
                 os.remove(entry.path)
-
 
 def writeToFile(files,textFiles):
     with open(files, "rb") as f1,open(textFiles, "w") as f2:
@@ -31,22 +29,31 @@ def readFromFile(files):
     return data
 
 
+def getAudioAndTxtFiles(lang,ticket):
+    return None
 
-def generateAudio(text,lang,ticket,paths=c.PATH_FOLDER):
-    
-    if not os.path.exists(paths):
+def generateAudio(text,lang,ticket,paths):
+   
+    if not os.path.exists(c.PATH_FOLDER):
         FlushRepository()
-        os.makedirs(paths)
-    
-    audioName = "/audio_"+lang+"_"+ticket+".mp4"
-    AudioFiles = paths+audioName
-    TxtFiles = paths+"/base64_"+lang+"_"+ticket+".txt"
+        os.makedirs(c.PATH_FOLDER)
 
-    print(TxtFiles)
+        
+    audioName = "/audio_"+lang+"_"+ticket+".mp4"
+    
+    AudioFiles = c.PATH_FOLDER + audioName
+
+    TxtFiles = c.PATH_FOLDER+"/base64_"+lang+"_"+ticket+".txt"
+
     textSpeechFR = gTTS(text=text, lang=lang, slow=False)
     textSpeechFR.save(AudioFiles)
 
-    audioURL = requests.compat.urljoin("http://"+c.address+"/audio/",audioName)
+    lists = paths.split("/")
+    print(lists)
+    audio = lists[0]
+    subFold = lists[1]
+
+    audioURL = c.http+c.address+"/"+audio+"/"+subFold+audioName
 
     writeToFile(AudioFiles,TxtFiles)
     data = readFromFile(TxtFiles)
