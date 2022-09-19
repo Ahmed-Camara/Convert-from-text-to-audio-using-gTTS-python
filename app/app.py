@@ -17,9 +17,12 @@ def convertFromTextToAudio():
         TicketNum = request.json['TicketNum']
         path = request.json['path']
         address = request.json['address']
+        pathRacine = request.json["pathRacine"]
 
         c.address = address
+        c.PATH_FOLDER = pathRacine + "/" + path
 
+       
         if textFR is None or len(textFR) == 0:
             c.dataENURL,c.dataEN = utils.generateAudio(textEN,'en',TicketNum,path)
             c.dataFRURL = c.dataFR = ""
@@ -50,6 +53,5 @@ def convertFromTextToAudio():
         "data_french_url":c.dataFRURL,
         "data_english_url":c.dataENURL
     })
-#serve(app,host=c.host,port=c.port,threads=1)
 if __name__ == "__main__":
     app.run(host=c.host,port=c.port, debug=True, threaded=True)
